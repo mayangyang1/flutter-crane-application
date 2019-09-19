@@ -13,7 +13,7 @@ loginPageWidget(TextEditingController phoneController, TextEditingController pas
           padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         ),
         Padding(
-          child: InputWidget(passwordController, '请输入密码', (res){},imgUrl: 'assets/images/password.png',),
+          child: InputWidget(passwordController, '请输入密码', (res){},imgUrl: 'assets/images/password.png',obscureText: true,),
           padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 20.0),
         ),
         CommonButtonWidget(context, '登录', onTap)

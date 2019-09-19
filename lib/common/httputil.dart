@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import '../config/base_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/toast.dart';
-import '../common/util.dart';
 
 class HttpUtil {
   static void get(
