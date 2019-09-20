@@ -49,41 +49,41 @@ Widget drawer(BuildContext context, List themeColorList, bool status) {
             ),
           ),
         ),
-        Container(
-          height: 40,
-          child: Padding(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(status? Icons.brightness_2:Icons.wb_sunny),
-                    Padding(
-                      child: Text(status? '黑夜模式' : '白天模式'),
-                      padding: EdgeInsets.only(left: 10),
-                    )
-                  ],
-                ),
-                StatefulBuilder(
-                  builder: (BuildContext context, setState) {
-                    return Switch (
-                      value: status,
-                      onChanged: (val) {
-                        setState(() {
-                          status = val; 
-                        });
-                      },
-                      activeColor: Color(themeColorList[Provider.of<ThemeModel>(context).value]['primaryColor'])
-                    );
-                  },
-                ),
+        // Container(
+        //   height: 40,
+        //   child: Padding(
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: <Widget>[
+        //         Row(
+        //           children: <Widget>[
+        //             Icon(status? Icons.brightness_2:Icons.wb_sunny),
+        //             Padding(
+        //               child: Text(status? '黑夜模式' : '白天模式'),
+        //               padding: EdgeInsets.only(left: 10),
+        //             )
+        //           ],
+        //         ),
+        //         StatefulBuilder(
+        //           builder: (BuildContext context, setState) {
+        //             return Switch (
+        //               value: status,
+        //               onChanged: (val) {
+        //                 setState(() {
+        //                   status = val; 
+        //                 });
+        //               },
+        //               activeColor: Color(themeColorList[Provider.of<ThemeModel>(context).value]['primaryColor'])
+        //             );
+        //           },
+        //         ),
                 
-              ],
-            ),
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          ),
-        ),
-        Divider(),
+        //       ],
+        //     ),
+        //     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        //   ),
+        // ),
+        // Divider(),
         listItem('主题', Icons.color_lens, () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context){
             return ThemeSettingPage();

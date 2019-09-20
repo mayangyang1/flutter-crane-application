@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../common/httputil.dart';
 import 'package:flutter/cupertino.dart';
 import '../config/theme_config.dart';
@@ -27,6 +28,8 @@ class _TaskListPageState extends State<TaskListPage> {
     return Scaffold(
       appBar: AppBar(
         leading: leading(),
+        title: Text('任务列表'),
+        centerTitle: true,
       ),
       drawer: drawer(context, themeColorList, status),
       body: CommonRefreshListWidget(_controller,logisticsList, '暂无订单', _loadMore, _onRefresh, itemCardWidget)
@@ -63,10 +66,43 @@ class _TaskListPageState extends State<TaskListPage> {
         padding: EdgeInsets.all(10.0),
         // height: 200,
         decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 1,color: Color(0XFFCCCCCC)),top: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
           color: Color(0xFFFFFFFF)
         ),
-        child: Text('777')
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('20190917D002332',style: TextStyle(
+                    fontSize: ScreenUtil().setSp(40)
+                  ),),
+                  Text('执行中',style: TextStyle(
+                    color: Color(0xFF888888)
+                  ),)
+                ],
+              ),
+            ),
+            Padding(
+              child: Text('煤炭'),
+              padding: EdgeInsets.only(bottom: 10),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text('发货单位',style: TextStyle(
+                  color: Color(0xFF787878)
+                ),),
+                SizedBox(width: 10,),
+                Text('收货单位',style: TextStyle(
+                  color: Color(0xFF787878)
+                ),)
+              ],
+            )
+          ],
+        )
       ),
       onTap: (){
         

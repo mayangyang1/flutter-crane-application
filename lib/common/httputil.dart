@@ -85,7 +85,7 @@ class HttpUtil {
       Response response;
       Dio dio = new Dio();
       dio.options.connectTimeout = 10000;//服务器连接超时
-      dio.options.receiveTimeout = 3000;//响应流上前后两次接收到的数据间隔
+      dio.options.receiveTimeout = 10000;//响应流上前后两次接收到的数据间隔
       dio.options.headers.addAll(headersMap);
       //拦截器
       dio.interceptors.add(InterceptorsWrapper(

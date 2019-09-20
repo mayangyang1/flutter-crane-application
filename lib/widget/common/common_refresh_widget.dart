@@ -33,7 +33,7 @@ class CommonRefreshListWidget extends StatelessWidget {
         noMoreText: '完成',
         loadText: '上拉加载',
         loadReadyText: '上拉加载',
-        loadedText: '加载完成',
+        loadedText: '加载中',
         loadingText: '加载中',
         showInfo: false
       ),
