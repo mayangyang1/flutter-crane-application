@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import '../config/theme_config.dart';
 import '../widget/task_list_page_widget.dart';
 import '../widget/common/common_refresh_widget.dart';
+import '../components/componentsModel.dart';
 
 class TaskListPage extends StatefulWidget {
   @override
@@ -18,9 +19,11 @@ class _TaskListPageState extends State<TaskListPage> {
   int page = 1;
   String logisticsStatus = "todo,doing,finish";
   List logisticsList = [];
+  bool _loading = true;
   @override
   void initState() { 
     super.initState();
+    _loading = true;
     _getTaskListInfo();
   }
   @override
@@ -32,7 +35,11 @@ class _TaskListPageState extends State<TaskListPage> {
         centerTitle: true,
       ),
       drawer: drawer(context, themeColorList, status),
-      body: CommonRefreshListWidget(_controller,logisticsList, '暂无订单', _loadMore, _onRefresh, itemCardWidget)
+      body: ProgressDialog(
+        msg: '加载中···',
+        loading: _loading,
+        child: CommonRefreshListWidget(_controller,logisticsList, '暂无订单', _loadMore, _onRefresh, itemCardWidget),
+      )
     );
   }
   Future  _loadMore()async{
@@ -49,6 +56,11 @@ class _TaskListPageState extends State<TaskListPage> {
     params["size"] = 10;
     params["logisticsStatus"] = logisticsStatus;
     HttpUtil.get('/logistics/logistics/list',context, data: params,success: (res) {
+      if(_loading) {
+        setState(() {
+        _loading = false; 
+        });
+      }
       if(res["code"] == 200 && res['content'].length > 0) {
         page++;
         setState(() {
@@ -58,7 +70,6 @@ class _TaskListPageState extends State<TaskListPage> {
       }
     });
   }
-
   Widget itemCardWidget(int index, Map item){
     return InkWell(
       child: Container(

@@ -131,7 +131,7 @@ class HttpUtil {
         },
         onError: (DioError e) {
           //当请求失败时做一些预处理
-
+          print('dioError=$e');
           return e;
         }
       ));
@@ -149,7 +149,11 @@ class HttpUtil {
         success(resCallBackMap);
       }
 
-    }catch(exception) {
+    }on DioError catch(exception) {
+      if(exception.response.statusCode == 500) {
+        Toast.toast(context, exception.response.data['content']);
+      }
+      print('exception错误是 $exception');
       _handError(error, '数据请求错误：'+exception.toString());
     }
   }

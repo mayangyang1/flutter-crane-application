@@ -36,21 +36,29 @@ class _LoginPageState extends State<LoginPage> {
     params["account"] = phoneController.text.trim();
     params["password"] = passwordController.text.trim();
 
-    Dio dio = new Dio();
-    dio.options.contentType = ContentType.parse(HttpConfig.contentType);
-    dio.post(HttpConfig.url + '/account/login',data: params).then((res){
-      if(res.data['code'] == 200) {
-        String cookies = Utils.getCookie(res);
-        prefs.setString('cookies', cookies);
-        Toast.toast(context, '登录成功');
-        Future.delayed(Duration(milliseconds: 1000),() {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context){
-            return IndexPage();
-          }));
-        });
-      }else{
-        Toast.toast(context, res.data['content']);
+    try {
+      Response response;
+      Dio dio = new Dio();
+      dio.options.contentType = ContentType.parse(HttpConfig.contentType);
+      response = await dio.post(HttpConfig.url + '/account/login',data: params);
+        if(response.data['code'] == 200) {
+          String cookies = Utils.getCookie(response);
+          prefs.setString('cookies', cookies);
+          Toast.toast(context, '登录成功');
+          Future.delayed(Duration(milliseconds: 1000),() {
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){
+              return IndexPage();
+            }), (route)=> null);
+          });
+        }else{
+          Toast.toast(context, response.data['content']);
+        }
+    }on DioError catch(e) {
+      if(e.response.statusCode == 500) {
+        Toast.toast(context, e.response.data['content']);
       }
-    });
+      print(e);
+    }
+    
   }
 }
