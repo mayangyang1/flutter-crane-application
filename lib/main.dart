@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
     
-        primaryColor: Color(themeColorList[Provider.of<ThemeModel>(context).value != 0? Provider.of<ThemeModel>(context).value : this.themIndex]["primaryColor"]),
+        primaryColor: Color(themeColorList[Provider.of<ThemeModel>(context).value != null? Provider.of<ThemeModel>(context).value : this.themIndex]["primaryColor"]),
         iconTheme: IconThemeData(
-          color: Color(themeColorList[Provider.of<ThemeModel>(context).value != 0? Provider.of<ThemeModel>(context).value : this.themIndex]["primaryColor"])
+          color: Color(themeColorList[Provider.of<ThemeModel>(context).value != null? Provider.of<ThemeModel>(context).value : this.themIndex]["primaryColor"])
         ),
       ),
       routes: <String, WidgetBuilder> {

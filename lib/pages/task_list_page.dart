@@ -87,7 +87,7 @@ class _TaskListPageState extends State<TaskListPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('20190917D002332',style: TextStyle(
+                  Text(item['logisticsNo']??'',style: TextStyle(
                     fontSize: ScreenUtil().setSp(40)
                   ),),
                   Text('执行中',style: TextStyle(
@@ -97,17 +97,17 @@ class _TaskListPageState extends State<TaskListPage> {
               ),
             ),
             Padding(
-              child: Text('煤炭'),
+              child: Text(item['goodsName']??''),
               padding: EdgeInsets.only(bottom: 10),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Text('发货单位',style: TextStyle(
+                Text(item['loadingOrgName']??'',style: TextStyle(
                   color: Color(0xFF787878)
                 ),),
                 SizedBox(width: 10,),
-                Text('收货单位',style: TextStyle(
+                Text(item['unloadingOrgName']??'',style: TextStyle(
                   color: Color(0xFF787878)
                 ),)
               ],

@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
           Future.delayed(Duration(milliseconds: 1000),() {
             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){
               return IndexPage();
-            }), (route)=> null);
+            }), (route)=> route == null);
           });
         }else{
           Toast.toast(context, response.data['content']);
